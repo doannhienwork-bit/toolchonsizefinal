@@ -18,27 +18,27 @@
 .popup-close {
     font-family: 'Be Vietnam Pro', sans-serif !important;
 }
-/* Đặt team-box ở chế độ relative để nút bám theo */
+
 .team-box {
     position: relative;
 }
 
-/* Nút icon */
+
 .popup-info-btn {
     position: absolute;
-    top: 6px;       /* chỉnh cao */
-    right: 6px;     /* chỉnh sát mép phải */
+    top: 6px;       
+    right: 6px;     
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 5;     /* để nằm trên cùng */
+    z-index: 5;     
 }
 .hidden {
   display: none !important;
 }
 
-/* Vòng tròn ! */
+
 .info-circle {
     width: 22px;
     height: 22px;
@@ -53,14 +53,14 @@
     transition: 0.2s ease;
 }
 
-/* Hiệu ứng hover */
+
 .popup-info-btn:hover .info-circle {
     background: #ff4b4b;
     color: #fff;
 }
 
 
-/* Popup overlay */
+
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -71,7 +71,7 @@
   z-index: 9990;
 }
 
-/* Popup box */
+
 .popup-box {
   background: #ffffff;
   width: 92%;
@@ -96,7 +96,7 @@
   color: #0b3954;
 }
 
-/* Section */
+
 .popup-section {
   display: flex;
   gap: 12px;
@@ -126,7 +126,7 @@
   padding-left: 18px;
 }
 
-/* Close button */
+
 .popup-close {
   margin-top: 14px;
   width: 100%;
@@ -144,7 +144,7 @@
   background: #0b6c9b;
 }
 
-/* Button mở popup */
+
 .guide-btn {
   background: #eef5fb;
   color: #06324b;
@@ -420,7 +420,7 @@ body{
     .team-title{font-weight:800;font-size:14px;margin-bottom:4px;color:#0b3954}
     .team-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
     .team-table-wrap{
-      max-height:520px; /* cao hơn để thấy thêm nhiều dòng */
+      max-height:520px; 
       overflow:auto;
       margin-top:6px
     }
@@ -512,7 +512,7 @@ body{
       Bạn có thể:
       <br>• Bấm <b>Tải về</b> để lưu file Excel
       <br>• Sau đó gửi file thủ công qua Zalo, Messenger hoặc Email<br><br>
-      <i>Gợi ý: Chức năng chia sẻ file thường hoạt động tốt trên Chrome (Android) và Safari (iPhone).</i>
+      <i>Gợi ý: Chức năng chia sẻ file thường hoạt động tốt trên thiết bị IOS (iPhone).</i>
     </p>
 
     <button class="popup-close" onclick="closeShareGuide()">Đã hiểu ✔</button>
@@ -757,7 +757,7 @@ body{
 </main>
 
 <script>
-  /* ====== DATA ====== */
+  
   const MALE=[
     {code:"XS",w:[45,50],h:[140,150],len:58,chest:44,sleeve:20},
     {code:"S",w:[50,55],h:[145,155],len:61,chest:46,sleeve:21},
@@ -795,7 +795,7 @@ body{
 
   const $ = id => document.getElementById(id);
 
-  /* ====== RENDER SIZE TABLES ====== */
+  
   function renderMale(){
     $("tableBodyMale").innerHTML = MALE.map(r=>`
       <tr>
@@ -832,7 +832,7 @@ body{
   }
   renderMale(); renderFemale(); renderKids();
 
-  /* ====== UTILS ====== */
+  
 function parseNum(x){
   if (x == null) return NaN;
   x = String(x)
@@ -874,7 +874,7 @@ function parseNum(x){
     renderTeamTable();
   }
 
-  /* ====== THÔNG SỐ ÁO — LOGIC 1 NGƯỜI ====== */
+  
   function calcSuggestions(len, chest, sleeve, table){
     let bestOverall={idx:-1,score:Infinity};
     let bestChest={idx:-1,score:Infinity};
@@ -1199,7 +1199,7 @@ function parseNum(x){
     }
   }
 
-  /* ====== CAO / CÂN NẶNG ====== */
+  
   function inRange(v,[a,b]){ return v>=a && v<=b; }
   function distToRange(v,[a,b]){ if(v<a) return a-v; if(v>b) return v-b; return 0; }
   function width(range){ const [a,b]=range; return Math.max(1e-9, b-a); }
@@ -1391,7 +1391,7 @@ function parseNum(x){
     }
   }
 
-  /* ====== TEAM ====== */
+  
   let teamRows = [];
   let nextRowId = 1;
 
@@ -1593,7 +1593,7 @@ function parseNum(x){
     teamRows = [];
     renderTeamTable();
   }
-// Chuẩn bị dữ liệu Excel theo mode đang chọn (measure/body)
+
 function buildExcelDataForCurrentMode(){
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const rows = teamRows.filter(r => r.mode === mode);
@@ -1646,7 +1646,7 @@ function buildExcelDataForCurrentMode(){
   return { mode, data };
 }
 
-  /* ====== CSV ====== */
+  
  function downloadCSV(){
   if (typeof XLSX === "undefined") {
     alert("Không tìm thấy thư viện XLSX. Không thể tạo file Excel.");
@@ -1664,7 +1664,6 @@ function buildExcelDataForCurrentMode(){
 
   const fileName = `bang-size-doi-${mode}.xlsx`;
 
-  // Xuất thẳng file Excel
   XLSX.writeFile(wb, fileName);
 }
 
@@ -1675,14 +1674,12 @@ function handleSuggest(){
   const name   = $("playerName").value.trim() || "Cầu thủ " + (teamRows.length + 1);
   const number = $("playerNumber").value.trim();
 
-  // Lấy giá trị 2 nhóm
   const len    = parseNum($("len").value);
   const chest  = parseNum($("chest").value);
   const sleeve = parseNum($("sleeve").value);
   const h      = parseNum($("height").value);
   const w      = parseNum($("weight").value);
 
-  // Kiểm tra: bắt buộc nhập (len + chest) HOẶC (h + w)
   const hasMeasure = (!Number.isNaN(len) && !Number.isNaN(chest));
   const hasBody    = (!Number.isNaN(h)   && !Number.isNaN(w));
 
@@ -1693,7 +1690,6 @@ function handleSuggest(){
     return;
   }
 
-  // Nếu người dùng nhập cả 2 bộ, ưu tiên theo tab đang chọn
   let finalMode;
   if (hasMeasure && hasBody) {
     finalMode = currentMode; // dùng tab đang active
@@ -1703,7 +1699,6 @@ function handleSuggest(){
     finalMode = "body";
   }
 
-  // Gọi logic tương ứng + thêm vào danh sách đội
   let rec, ok;
 
   if (finalMode === "measure") {
@@ -1738,7 +1733,7 @@ function handleSuggest(){
 }
 
 
-  /* ====== CLEAR & INIT ====== */
+  
   function clearAll(){
     ["len","chest","sleeve","weight","height","playerName","playerNumber"].forEach(id=>{
       const el=$(id); if(el) el.value="";
@@ -1751,7 +1746,7 @@ function handleSuggest(){
   toggleTables();
   renderTeamTable();
 
-  /* ====== EXCEL TEMPLATE & IMPORT ====== */
+  
   function parseGenderLabel(label){
     const s = (label || "").toString().trim().toLowerCase();
     if(!s) return $("gender").value || "male";
@@ -1966,7 +1961,7 @@ function handleSuggest(){
     reader.readAsArrayBuffer(file);
   }
 
-  /* ====== ENTER ĐỂ GỢI Ý ====== */
+  
   ["len","chest","sleeve","weight","height"].forEach(id=>{
     const el=$(id); if(!el) return;
     el.addEventListener("keydown",e=>{
@@ -1975,8 +1970,17 @@ function handleSuggest(){
   });
 lucide.createIcons();
 
-// Chia sẻ file Excel: nếu không share được thì mở popup hướng dẫn
 async function shareExcel() {
+
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+
+  if (!isIOS || !navigator.share) {
+    showShareGuide();
+    return;
+  }
+
   if (typeof XLSX === "undefined") {
     alert("Không tìm thấy thư viện XLSX. Không thể tạo file để chia sẻ.");
     return;
@@ -1987,7 +1991,6 @@ async function shareExcel() {
 
   const { mode, data } = built;
 
-  // Tạo workbook Excel
   const ws = XLSX.utils.aoa_to_sheet(data);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "DanhSachSize");
@@ -2001,7 +2004,6 @@ async function shareExcel() {
   );
   const file = new File([blob], fileName, { type: blob.type });
 
-  // 1) Thiết bị hỗ trợ share file (file sharing)
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     try {
       await navigator.share({
@@ -2012,12 +2014,11 @@ async function shareExcel() {
       return;
     } catch (e) {
       console.log("User canceled share:", e);
-      // Người dùng bấm huỷ -> thôi, không cần popup
+
       return;
     }
   }
 
-  // 2) Không hỗ trợ share file -> hiện popup hướng dẫn
   showShareGuide();
 }
 
@@ -2034,23 +2035,14 @@ function showShareGuide(){
 function closeShareGuide(){
   document.getElementById("shareGuidePopup").style.display = "none";
 }
-// Hiển thị nút chia sẻ CHỈ trên thiết bị di động có hỗ trợ share
-// Hiển thị nút chia sẻ CHỈ trên thiết bị di động
+
 window.addEventListener("DOMContentLoaded", function () {
   const shareBtn = document.getElementById("shareButton");
   if (!shareBtn) return;
 
-  const ua = navigator.userAgent || "";
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
-
-  if (isMobile) {
-    // Mobile: luôn cho hiện nút, shareExcel sẽ tự lo share được hay bật popup
-    shareBtn.classList.remove("hidden");
-  } else {
-    // Desktop/laptop: ẩn nút chia sẻ
-    shareBtn.classList.add("hidden");
-  }
+  shareBtn.classList.remove("hidden");
 });
+
 
 
 </script>
